@@ -1,8 +1,24 @@
 import type { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {
   pages: { signIn: "/login", error: "/login" },
   providers: [
+    ...(process.env.NEXT_PUBLIC_STARTER_MODE === "true" ? [
+      CredentialsProvider({
+        id: "starter-mock",
+        name: "Mock Starter Mode",
+        credentials: {},
+        async authorize() {
+          return {
+            id: "dev-mock-123",
+            name: "Jane Doe (Developer Preview)",
+            email: "jane.doe@zororophumulani.co.za",
+            role: "developer"
+          };
+        }
+      })
+    ] : []),
     {
       id: "zororo-identity",
       name: "Zororo Phumulani Identity",
