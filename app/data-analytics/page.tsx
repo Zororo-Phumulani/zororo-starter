@@ -28,6 +28,24 @@ export default function DataHeavyLayout() {
 
   const identityToken = (session as any)?.identityAccessToken || (session as any)?.accessToken || "";
 
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Check initial theme
+    const theme = localStorage.getItem("zororo-theme") || "light";
+    setIsDark(theme === "dark");
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, []);
+
+  const toggleTheme = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    const next = !isDark;
+    setIsDark(next);
+    localStorage.setItem("zororo-theme", next ? "dark" : "light");
+    document.documentElement.classList.toggle("dark", next);
+  };
+
   // Mount switcher safely on client-side navigations
   useEffect(() => {
     // Clear the lock so the IIFE runs again
@@ -147,12 +165,19 @@ export default function DataHeavyLayout() {
                 Settings
               </Link>
               
-              <div className="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer border-t border-slate-100 dark:border-slate-700" onClick={() => {
-                const theme = document.documentElement.classList.contains("dark") ? "light" : "dark";
-                document.documentElement.classList.toggle("dark", theme === "dark");
-                localStorage.setItem("zororo-theme", theme);
-              }}>
-                <span className="flex items-center gap-3"><Moon className="w-4 h-4 text-slate-400" /> Appearance</span>
+              <div 
+                className="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer border-t border-slate-100 dark:border-slate-700" 
+                onClick={toggleTheme}
+              >
+                <span className="flex items-center gap-3">Appearance</span>
+                <button 
+                  type="button"
+                  aria-label="Toggle dark mode"
+                  title="Switch appearance"
+                  className="inline-flex size-6 shrink-0 items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                >
+                  {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                </button>
               </div>
               
               <button 
