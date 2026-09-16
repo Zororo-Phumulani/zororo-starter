@@ -2,6 +2,7 @@
 
 import { useSession, signIn } from "next-auth/react";
 import { AppWindow, LayoutGrid, Users, Heart } from "lucide-react";
+import Link from "next/link";
 
 export default function StarterPage() {
   const { data: session, status } = useSession();
