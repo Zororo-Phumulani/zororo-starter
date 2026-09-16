@@ -45,8 +45,8 @@ export default function DataHeavyLayout() {
         <div className={`flex items-center shrink-0 transition-all duration-300 border-b border-slate-200 dark:border-slate-800 ${
           collapsed ? "h-16 justify-center" : "h-16 px-4 justify-between"
         }`}>
-          <div className={`flex items-center gap-3 overflow-hidden ${collapsed ? "justify-center" : "flex"}`}>
-            <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center shrink-0 shadow-sm">
+          <div className={`flex items-center gap-3 overflow-hidden ${collapsed ? "justify-center w-full" : "flex"}`}>
+            <div className="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center shrink-0 shadow-sm">
               <span className="font-bold font-mono text-base">$</span>
             </div>
             {!collapsed && (
@@ -84,19 +84,27 @@ export default function DataHeavyLayout() {
             </div>
           )}
           
-          <Link href="#" className="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 bg-[#123c5a] dark:bg-white text-white dark:text-slate-900 font-medium group relative shadow-sm">
+          <Link href="#" className={`flex items-center transition-all duration-200 rounded-xl group relative shadow-sm font-medium bg-[#123c5a] dark:bg-white text-white dark:text-slate-900 ${
+            collapsed ? "w-11 h-11 justify-center mx-auto p-0" : "gap-3 px-3 py-2.5 w-full"
+          }`}>
             <LayoutDashboard className="w-5 h-5 shrink-0 transition-transform duration-200 scale-110" />
             {!collapsed && <span className="truncate">Overview</span>}
           </Link>
-          <Link href="#" className="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200 group relative">
+          <Link href="#" className={`flex items-center transition-all duration-200 rounded-xl group relative font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200 ${
+            collapsed ? "w-11 h-11 justify-center mx-auto p-0" : "gap-3 px-3 py-2.5 w-full"
+          }`}>
             <Receipt className="w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
             {!collapsed && <span className="truncate">Collections</span>}
           </Link>
-          <Link href="#" className="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200 group relative">
+          <Link href="#" className={`flex items-center transition-all duration-200 rounded-xl group relative font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200 ${
+            collapsed ? "w-11 h-11 justify-center mx-auto p-0" : "gap-3 px-3 py-2.5 w-full"
+          }`}>
             <Wallet className="w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
             {!collapsed && <span className="truncate">Ledger</span>}
           </Link>
-          <Link href="#" className="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200 group relative">
+          <Link href="#" className={`flex items-center transition-all duration-200 rounded-xl group relative font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200 ${
+            collapsed ? "w-11 h-11 justify-center mx-auto p-0" : "gap-3 px-3 py-2.5 w-full"
+          }`}>
             <Users className="w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
             {!collapsed && <span className="truncate">Customers</span>}
           </Link>
@@ -144,9 +152,9 @@ export default function DataHeavyLayout() {
                 setDropupOpen(!dropupOpen);
               }
             }}
-            className={`flex items-center gap-3 w-full p-2 rounded-xl transition-all duration-200 text-left ${
+            className={`flex items-center transition-all duration-200 text-left ${
               dropupOpen ? "bg-slate-100 dark:bg-slate-800" : "hover:bg-slate-50 dark:hover:bg-slate-800/50"
-            } ${collapsed ? "justify-center" : ""}`}
+            } ${collapsed ? "w-11 h-11 justify-center mx-auto p-0 rounded-full" : "w-full p-2 gap-3 rounded-xl"}`}
             title={collapsed ? "Account menu" : "Settings"}
           >
             {collapsed ? (
