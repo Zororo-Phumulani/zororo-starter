@@ -34,13 +34,11 @@ export default function RootLayout({
         </main>
 
         {/* Global Chat/Support Widget */}
-        {process.env.NEXT_PUBLIC_WIDGET_URL && (
-          <Script
-            src={process.env.NEXT_PUBLIC_WIDGET_URL}
-            strategy="lazyOnload"
-            data-app-code="STARTER_APP"
-          />
-        )}
+        <Script
+          src={process.env.NEXT_PUBLIC_WIDGET_URL || "https://it.zororophumulani.co.za/widget.js"}
+          strategy="lazyOnload"
+          data-app-code="STARTER_APP"
+        />
         </Providers>
       </body>
     </html>
