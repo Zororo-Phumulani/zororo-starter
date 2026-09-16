@@ -22,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${poppins.variable} font-sans min-h-screen bg-[#fbfbf9] flex flex-col text-slate-900`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} ${poppins.variable} font-sans min-h-screen bg-[#fbfbf9] dark:bg-slate-950 flex flex-col text-slate-900 dark:text-slate-50 transition-colors`}>
         <Providers>
         
         {/* Navigation Bar - matching Workspace architecture */}
