@@ -14,7 +14,8 @@ import {
   Bell,
   LogOut,
   Moon,
-  Sun
+  Sun,
+  MoreVertical
 } from "lucide-react";
 import Script from "next/script";
 
@@ -121,14 +122,17 @@ export default function DataHeavyLayout() {
               {getInitials(session?.user?.name)}
             </div>
             {!collapsed && (
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-slate-900 dark:text-white truncate">
-                  {session?.user?.name || 'Developer'}
-                </p>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
-                  {session?.user?.email || 'admin@zororo.co.za'}
-                </p>
-              </div>
+              <>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium text-slate-900 dark:text-white truncate">
+                    {session?.user?.name || 'Developer'}
+                  </p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
+                    {session?.user?.email || 'admin@zororo.co.za'}
+                  </p>
+                </div>
+                <MoreVertical className="w-4 h-4 text-slate-400 shrink-0" />
+              </>
             )}
           </button>
         </div>
