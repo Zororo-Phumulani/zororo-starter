@@ -157,17 +157,22 @@ export default function StarterPage() {
                 </div>
               </article>
 
-              <article className="p-6 flex flex-col justify-center">
-                <h2 className="text-xl font-semibold text-slate-900 dark:text-white m-0 mb-2">
+              <article className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 flex flex-col h-full">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200">
+                    <LayoutGrid className="w-6 h-6" />
+                  </div>
+                </div>
+                <h2 className="text-lg font-semibold text-slate-900 dark:text-white m-0 mb-1">
                   Data Analytics Layout
                 </h2>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mb-4 max-w-sm">
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">
                   See how the application adapts for administrative interfaces and data-heavy dashboards, featuring the collapsible Collections Agent sidebar with bottom avatar placement.
                 </p>
-                <div>
+                <div className="mt-auto">
                   <Link 
                     href="/data-analytics"
-                    className="inline-flex items-center gap-3 justify-center px-6 py-2.5 bg-[#0c1e33] text-white hover:bg-slate-800 font-medium rounded-md transition-colors w-auto"
+                    className="inline-flex items-center gap-3 w-full justify-center px-4 py-2.5 bg-[#0c1e33] text-white hover:bg-slate-800 font-medium rounded-md transition-colors"
                   >
                     Preview sidebar layout
                     <span aria-hidden="true">→</span>
