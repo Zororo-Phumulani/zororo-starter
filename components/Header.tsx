@@ -159,7 +159,7 @@ export function Header() {
                 <div className="h-px bg-slate-200 dark:bg-slate-800 my-2 -mx-4"></div>
 
                 <a
-                  href={${process.env.NEXT_PUBLIC_IDENTITY_URL ?? "https://identity.zororophumulani.co.za"}/security}
+                  href={`${process.env.NEXT_PUBLIC_IDENTITY_URL ?? "https://identity.zororophumulani.co.za"}/security`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex min-h-[44px] w-full items-center justify-between rounded-md pl-3 pr-1 py-1 text-[14px] text-slate-900 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors no-underline"
