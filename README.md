@@ -10,14 +10,12 @@ A minimal Next.js 14 template demonstrating how to connect a new application to 
 
 ## Getting Started
 
-### 1. Environment Setup
-Copy `.env.example` to `.env.local`:
-```bash
-cp .env.example .env.local
-```
+### 1. Environment Setup & Configuration
+To protect internal ecosystem endpoints, this repository does not include environment variable examples. 
 
-### 2. Configure Secrets
-Update the environment variables in `.env.local` with your specific OAuth client credentials obtained from the Identity admin panel.
+**You must obtain the official `.env.local` configuration template from the secured Zororo Phumulani Documentation Portal.** 
+
+Once you have copied the configuration from the documentation portal into your local `.env.local` file, ensure you replace the client ID and secret with your app's specific credentials.
 
 **Important**: You must generate a secure, random secret for `NEXTAUTH_SECRET`. You can generate one by running the following command in your terminal:
 ```bash
@@ -25,7 +23,7 @@ openssl rand -base64 32
 ```
 Copy the output and paste it as your `NEXTAUTH_SECRET` in `.env.local`.
 
-### 3. Install & Run
+### 2. Install & Run
 Install dependencies:
 ```bash
 npm install
@@ -39,6 +37,6 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Key Files to Review
-* `lib/auth.ts`: NextAuth configuration linking to `https://identity.zororophumulani.co.za`. 
-* `app/layout.tsx`: See how the IT support `widget.js` script is mounted globally.
+* `lib/auth.ts`: NextAuth configuration linking to your configured `ZORORO_ISSUER`. 
+* `app/layout.tsx`: See how the IT support `widget.js` script is mounted globally via environment variables.
 * `components/Header.tsx`: Usage of `useSession()` to read the user's authenticated profile and dynamic mounting of the `switcher.js` UI.
