@@ -69,15 +69,6 @@ export function Header() {
           data-token={identityToken} 
         />
 
-        {/* Appearance Toggle */}
-        <button 
-          onClick={toggleTheme}
-          aria-label="Toggle dark mode"
-          className="order-3 flex items-center justify-center w-11 h-11 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
-        >
-          {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-        </button>
-
         {/* Avatar & Account Menu */}
         {session && session.user && (
           <details 
@@ -104,6 +95,20 @@ export function Header() {
                 {session.user.email || 'Zororo Phumulani App Starter'}
               </p>
               
+              <div className="h-px bg-slate-200 dark:bg-slate-800 my-2 -mx-4"></div>
+              
+              <div className="flex items-center justify-between py-2 mb-2">
+                <span className="text-[14px] text-slate-700 dark:text-slate-300">Appearance</span>
+                <button 
+                  onClick={toggleTheme}
+                  aria-label="Toggle dark mode"
+                  title="Switch appearance"
+                  className="flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+                >
+                  {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                </button>
+              </div>
+
               <div className="h-px bg-slate-200 dark:bg-slate-800 my-2 -mx-4"></div>
               
               <button 
