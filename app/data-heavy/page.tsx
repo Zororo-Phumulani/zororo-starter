@@ -64,9 +64,9 @@ export default function DataHeavyLayout() {
           {!collapsed && (
             <button
               onClick={() => setCollapsed(true)}
-              className="text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded p-1 flex items-center justify-center"
+              className="text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-xl w-9 h-9 flex items-center justify-center"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-5 h-5" />
             </button>
           )}
         </div>
@@ -77,9 +77,9 @@ export default function DataHeavyLayout() {
             <div className="flex justify-center mb-4">
               <button
                 onClick={() => setCollapsed(false)}
-                className="text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded w-8 h-8 flex items-center justify-center"
+                className="text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-xl w-11 h-11 flex items-center justify-center"
               >
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-5 h-5" />
               </button>
             </div>
           )}
