@@ -25,21 +25,21 @@ export default function StarterPage() {
     <div className="w-full">
       {!session ? (
         // Unauthenticated State - Exactly mirroring the Workspace Welcome Layout
-        <div className="max-w-[1248px] mx-auto px-6 pt-16 pb-8">
-          <section className="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-14 items-center">
+        <div className="max-w-[1248px] mx-auto px-[24px] py-[60px]">
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-[56px] items-center">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 mb-5">
                 ZORORO PHUMULANI APP STARTER
               </p>
-              <h1 className="text-[clamp(36px,4.3vw,56px)] leading-[1.12] font-bold text-slate-900 mb-6 max-w-[550px] font-inter">
+              <h1 className="text-[clamp(36px,4.3vw,56px)] leading-[1.12] font-semibold text-slate-900 mt-[20px] mb-[24px] max-w-[550px] font-inter">
                 Together, we make every day count.
               </h1>
-              <p className="text-[17px] leading-[1.8] text-slate-600 max-w-[520px] mb-10">
+              <p className="text-[17px] leading-[1.8] text-slate-600 max-w-[520px]">
                 Welcome to your Zororo Phumulani application starter. A clean, connected template that seamlessly integrates with Identity and the global Workspace.
               </p>
               <button
                 onClick={handleSignIn}
-                className="inline-flex items-center gap-5 px-6 py-4 bg-slate-900 text-white font-medium rounded-lg hover:bg-slate-800 transition-colors w-full md:w-auto justify-center"
+                className="inline-flex items-center gap-[36px] px-[20px] py-[14px] mt-[20px] bg-[#123c5a] text-white text-[14px] rounded-lg hover:bg-slate-800 transition-colors w-full md:w-auto justify-between"
               >
                 Continue with Zororo Phumulani Identity
                 <span aria-hidden="true" className="text-xl leading-none">'</span>
@@ -102,16 +102,16 @@ export default function StarterPage() {
         </div>
       ) : (
         // Authenticated State - Workspace List View Match
-        <div className="max-w-[1248px] mx-auto px-6 py-12">
+        <div className="max-w-[1248px] mx-auto px-[24px] py-[60px]">
           <section className="grid grid-cols-1 mb-8 pb-8 border-b border-slate-200">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 mb-2">
                 ZORORO PHUMULANI APP STARTER
               </p>
-              <h1 className="text-3xl md:text-4xl font-bold text-slate-900 font-inter mb-3">
+              <h1 className="text-[clamp(36px,4vw,54px)] leading-[1.13] font-semibold text-slate-900 font-inter mt-[18px] mb-[20px]">
                 Welcome, {session.user?.name?.trim().split(/\s+/)[0] || 'there'}.
               </h1>
-              <p className="text-slate-600 text-[17px]">
+              <p className="text-slate-600 text-[16px] max-w-[580px]">
                 Your application is connected and you are securely signed in.
               </p>
             </div>
@@ -120,13 +120,15 @@ export default function StarterPage() {
           <section aria-labelledby="apps-heading">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
               <div>
-                <h2 id="apps-heading" className="flex items-center gap-2.5 text-2xl font-semibold text-slate-900 m-0">
+                <h2 id="apps-heading" className="flex items-center gap-[10px] text-[21px] font-semibold text-slate-900 m-0">
                   Session Identity
-                  <span className="inline-flex items-center justify-center min-w-[28px] h-7 px-2 rounded-lg bg-emerald-100 text-emerald-800 text-[13px] font-medium tabular-nums">
+                  <span className="inline-flex items-center justify-center h-7 px-2.5 bg-emerald-100 text-emerald-800 text-[13px] font-medium rounded-lg">
                     Active
                   </span>
                 </h2>
-                <p className="text-slate-600 mt-1">Live data from the Zororo Phumulani token.</p>
+                <p className="text-[14px] text-slate-500 mt-[5px] mb-0">
+                  Live data from the Zororo Phumulani token.
+                </p>
               </div>
             </div>
             
