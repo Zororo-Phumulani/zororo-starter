@@ -43,18 +43,18 @@ export default function DataHeavyLayout() {
       >
         {/* Sidebar Header */}
         <div className={`flex items-center shrink-0 transition-all duration-300 border-b border-slate-200 dark:border-slate-800 ${
-          collapsed ? "h-[72px] justify-center" : "h-[72px] px-4 justify-between"
+          collapsed ? "h-16 justify-center" : "h-16 px-4 justify-between"
         }`}>
           <div className={`flex items-center gap-3 overflow-hidden ${collapsed ? "justify-center" : "flex"}`}>
-            <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center shrink-0">
-              <span className="font-bold font-mono text-sm">$</span>
+            <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center shrink-0 shadow-sm">
+              <span className="font-bold font-mono text-base">$</span>
             </div>
             {!collapsed && (
               <div className="flex flex-col overflow-hidden">
-                <span className="font-semibold text-[15px] tracking-tight truncate text-slate-900 dark:text-white leading-none mb-1">
+                <span className="font-semibold text-lg tracking-tight truncate text-slate-900 dark:text-white leading-tight mb-0.5">
                   Data Analytics
                 </span>
-                <span className="text-[12px] text-slate-500 truncate leading-none">
+                <span className="text-[13px] text-slate-500 truncate leading-none">
                   Zororo Phumulani
                 </span>
               </div>
@@ -150,19 +150,19 @@ export default function DataHeavyLayout() {
             title={collapsed ? "Account menu" : "Settings"}
           >
             {collapsed ? (
-              <div className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 shrink-0 flex items-center justify-center text-slate-700 dark:text-slate-300 font-semibold text-sm border border-slate-200 dark:border-slate-700">
+              <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 shrink-0 flex items-center justify-center text-slate-700 dark:text-slate-300 font-semibold text-sm border border-slate-200 dark:border-slate-700">
                 {getInitials(session?.user?.name)}
               </div>
             ) : (
               <>
-                <div className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 shrink-0 flex items-center justify-center text-slate-700 dark:text-slate-300 font-semibold text-sm border border-slate-200 dark:border-slate-700">
+                <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 shrink-0 flex items-center justify-center text-slate-700 dark:text-slate-300 font-semibold text-sm border border-slate-200 dark:border-slate-700">
                   {getInitials(session?.user?.name)}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[13px] font-medium text-slate-900 dark:text-white truncate">
+                  <p className="text-[13.5px] font-medium text-slate-900 dark:text-white truncate">
                     {session?.user?.name || 'Guest User'}
                   </p>
-                  <p className="text-[12px] text-slate-500 truncate">
+                  <p className="text-[12px] text-slate-500 truncate mt-0.5">
                     {session?.user?.email || 'user@zororophumulani.co.za'}
                   </p>
                 </div>
@@ -176,7 +176,7 @@ export default function DataHeavyLayout() {
       {/* Main Content Area */}
       <main className="flex-1 flex flex-col min-w-0 bg-slate-50 dark:bg-slate-950 overflow-hidden relative z-10">
         {/* Top bar for data-heavy view */}
-        <header className="h-[72px] border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-6 shrink-0 bg-white dark:bg-slate-900">
+        <header className="h-16 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-6 shrink-0 bg-white dark:bg-slate-900">
           <div className="flex items-center gap-2 text-slate-900 dark:text-white text-[14px]">
             <span className="text-slate-500">Data Analytics</span>
             <span className="text-slate-300 dark:text-slate-600">/</span>
