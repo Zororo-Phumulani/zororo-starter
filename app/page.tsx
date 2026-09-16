@@ -28,7 +28,7 @@ export default function StarterPage() {
         <div className="max-w-[1248px] mx-auto px-6 pt-16 pb-8">
           <section className="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-14 items-center">
             <div>
-              <p className="text-[11px] font-poppins font-bold uppercase tracking-wider text-slate-500 mb-5">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 mb-5">
                 ZORORO PHUMULANI APP STARTER
               </p>
               <h1 className="text-[clamp(36px,4.3vw,56px)] leading-[1.12] font-bold text-slate-900 mb-6 max-w-[550px] font-inter">
@@ -105,7 +105,7 @@ export default function StarterPage() {
         <div className="max-w-[1248px] mx-auto px-6 py-12">
           <section className="grid grid-cols-1 mb-8 pb-8 border-b border-slate-200">
             <div>
-              <p className="text-[11px] font-poppins font-bold uppercase tracking-wider text-slate-500 mb-2">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 mb-2">
                 ZORORO PHUMULANI APP STARTER
               </p>
               <h1 className="text-3xl md:text-4xl font-bold text-slate-900 font-inter mb-3">
