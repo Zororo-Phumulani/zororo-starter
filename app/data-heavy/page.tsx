@@ -7,9 +7,9 @@ import {
   ChevronLeft, 
   ChevronRight, 
   LayoutDashboard, 
-  Receipt, 
-  Users, 
-  Wallet,
+  Activity, 
+  BarChart3, 
+  Database,
   Settings,
   Bell,
   LogOut,
@@ -93,20 +93,20 @@ export default function DataHeavyLayout() {
           <Link href="#" className={`flex items-center transition-all duration-200 rounded-xl group relative font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200 ${
             collapsed ? "w-11 h-11 justify-center mx-auto p-0" : "gap-3 px-3 py-2.5 w-full"
           }`}>
-            <Receipt className="w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
-            {!collapsed && <span className="truncate">Collections</span>}
+            <Activity className="w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
+            {!collapsed && <span className="truncate">Transactions</span>}
           </Link>
           <Link href="#" className={`flex items-center transition-all duration-200 rounded-xl group relative font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200 ${
             collapsed ? "w-11 h-11 justify-center mx-auto p-0" : "gap-3 px-3 py-2.5 w-full"
           }`}>
-            <Wallet className="w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
-            {!collapsed && <span className="truncate">Ledger</span>}
+            <BarChart3 className="w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
+            {!collapsed && <span className="truncate">Reports</span>}
           </Link>
           <Link href="#" className={`flex items-center transition-all duration-200 rounded-xl group relative font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200 ${
             collapsed ? "w-11 h-11 justify-center mx-auto p-0" : "gap-3 px-3 py-2.5 w-full"
           }`}>
-            <Users className="w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
-            {!collapsed && <span className="truncate">Customers</span>}
+            <Database className="w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
+            {!collapsed && <span className="truncate">Sources</span>}
           </Link>
         </div>
 
@@ -223,17 +223,18 @@ export default function DataHeavyLayout() {
 
         {/* Mock Data Grid */}
         <div className="flex-1 overflow-auto p-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             {[
               { label: 'Total Volume', value: 'R 4.2M', trend: '+12.5%' },
               { label: 'Active Policies', value: '12,450', trend: '+3.2%' },
               { label: 'Exceptions', value: '24', trend: '-5.1%' },
+              { label: 'Success Rate', value: '99.8%', trend: '+0.1%' },
             ].map((stat, i) => (
               <div key={i} className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
                 <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-2">{stat.label}</p>
                 <div className="flex items-baseline gap-3">
                   <h3 className="text-3xl font-bold text-slate-900 dark:text-white">{stat.value}</h3>
-                  <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">{stat.trend}</span>
+                  <span className={`text-sm font-semibold ${stat.trend.startsWith('-') ? 'text-red-600 dark:text-red-400' : 'text-emerald-600 dark:text-emerald-400'}`}>{stat.trend}</span>
                 </div>
               </div>
             ))}
