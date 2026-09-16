@@ -40,6 +40,33 @@ export function Header() {
     };
   }, []);
 
+  // We explicitly load the switcher script here so it has access to the mount and token
+  const identityToken = (session as any)?.identityAccessToken || (session as any)?.accessToken || "";
+
+  // Mount switcher safely on client-side navigations
+  useEffect(() => {
+    // Clear the lock so the IIFE runs again
+    delete (window as any).__zpSwitcherLoaded;
+    
+    // Remove old instances if any exist to prevent duplicates
+    document.querySelectorAll('.__zp-sw, .__zp-sw-overlay').forEach(el => el.remove());
+
+    const script = document.createElement('script');
+    script.src = "https://identity.zororophumulani.co.za/switcher.js";
+    if (identityToken) {
+      script.setAttribute('data-token', identityToken);
+    }
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Clean up when leaving page
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, [identityToken]);
+
   const toggleTheme = (e?: React.MouseEvent) => {
     e?.preventDefault();
     e?.stopPropagation();
@@ -53,9 +80,6 @@ export function Header() {
     if (!name) return "?";
     return name.trim().split(/\s+/).slice(0, 2).map(part => part[0]).join("").toUpperCase();
   };
-
-  // We explicitly load the switcher script here so it has access to the mount and token
-  const identityToken = (session as any)?.identityAccessToken || (session as any)?.accessToken || "";
 
   if (pathname === '/data-analytics') {
     return null;
@@ -76,11 +100,6 @@ export function Header() {
         <nav aria-label="Your account" className="flex items-center gap-4 text-[13px]">
           {/* App Switcher Target Mount */}
           <div id="zp-app-switcher-mount" className="flex items-center justify-center w-11 h-11 order-1"></div>
-          <Script 
-            src="https://identity.zororophumulani.co.za/switcher.js" 
-            strategy="lazyOnload"
-            data-token={identityToken} 
-          />
 
           {/* Avatar & Account Menu */}
           {session && session.user && (
