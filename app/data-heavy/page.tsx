@@ -83,52 +83,66 @@ export default function DataHeavyLayout() {
           </Link>
         </div>
 
-        {/* Drop-up Menu */}
-        {dropupOpen && !collapsed && (
-          <div className="absolute bottom-[76px] left-3 right-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.12)] overflow-hidden flex flex-col z-50 animate-in slide-in-from-bottom-2 fade-in duration-200">
-            <Link 
-              href="#"
-              onClick={() => setDropupOpen(false)}
-              className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
-            >
-              <Settings className="w-4 h-4 text-slate-400" />
-              Settings
-            </Link>
-            <div className="flex items-center justify-between px-4 py-3 border-t border-slate-100 dark:border-slate-700 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer" onClick={() => {
-              const theme = document.documentElement.classList.contains("dark") ? "light" : "dark";
-              document.documentElement.classList.toggle("dark", theme === "dark");
-              localStorage.setItem("zororo-theme", theme);
-            }}>
-              <span className="flex items-center gap-3"><Moon className="w-4 h-4 text-slate-400" /> Appearance</span>
+        {/* Footer Actions / Drop-up */}
+        <div className="relative p-3 border-t border-slate-200 dark:border-slate-800 shrink-0 flex flex-col gap-2">
+  
+          {dropupOpen && !collapsed && (
+            <div className="absolute bottom-[80px] left-3 right-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl shadow-slate-900/10 overflow-hidden flex flex-col z-50 animate-in slide-in-from-bottom-2 fade-in duration-200">
+              <Link 
+                href="/settings"
+                onClick={() => setDropupOpen(false)}
+                className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+              >
+                <Settings className="w-4 h-4 text-slate-400" />
+                Settings
+              </Link>
+              
+              <div className="flex items-center justify-between px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer border-t border-slate-100 dark:border-slate-700" onClick={() => {
+                const theme = document.documentElement.classList.contains("dark") ? "light" : "dark";
+                document.documentElement.classList.toggle("dark", theme === "dark");
+                localStorage.setItem("zororo-theme", theme);
+              }}>
+                <span className="flex items-center gap-3"><Moon className="w-4 h-4 text-slate-400" /> Appearance</span>
+              </div>
+              
+              <button 
+                onClick={() => {
+                  signOut();
+                }}
+                className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors border-t border-slate-100 dark:border-slate-700 w-full text-left"
+              >
+                <LogOut className="w-4 h-4" />
+                Log out
+              </button>
             </div>
-            <button 
-              onClick={() => signOut()}
-              className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors border-t border-slate-100 dark:border-slate-700 w-full text-left"
-            >
-              <LogOut className="w-4 h-4" />
-              Sign out
-            </button>
-          </div>
-        )}
-
-        {/* Sidebar Footer (Avatar) */}
-        <div className="p-3 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-3 relative">
-          <button 
-            onClick={() => setDropupOpen(!dropupOpen)}
-            className={`flex items-center gap-3 text-left w-full p-2 rounded-xl transition-all duration-200 ${dropupOpen ? "bg-slate-100 dark:bg-slate-800" : "hover:bg-slate-50 dark:hover:bg-slate-800/50"} ${collapsed ? "justify-center" : ""}`}
-            title={collapsed ? "Account settings" : undefined}
+          )}
+  
+          <button
+            onClick={() => {
+              if (collapsed) {
+                signOut();
+              } else {
+                setDropupOpen(!dropupOpen);
+              }
+            }}
+            className={`flex items-center gap-3 w-full p-2 rounded-xl transition-all duration-200 text-left ${
+              dropupOpen ? "bg-slate-100 dark:bg-slate-800" : "hover:bg-slate-50 dark:hover:bg-slate-800/50"
+            } ${collapsed ? "justify-center text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20" : ""}`}
+            title={collapsed ? "Log out" : "Settings"}
           >
-            <div className="w-9 h-9 shrink-0 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-bold text-xs">
-              {getInitials(session?.user?.name)}
-            </div>
-            {!collapsed && (
+            {collapsed ? (
+              <LogOut className="w-5 h-5 shrink-0" />
+            ) : (
               <>
-                <div className="min-w-0 flex-1">
+                <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/30 shrink-0 flex items-center justify-center text-blue-600 font-semibold text-sm border-2 border-transparent group-hover:border-blue-500 transition-colors">
+                  {getInitials(session?.user?.name)}
+                </div>
+                <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-slate-900 dark:text-white truncate">
-                    {session?.user?.name || 'Developer'}
+                    {session?.user?.name || 'Guest User'}
                   </p>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
-                    {session?.user?.email || 'admin@zororo.co.za'}
+                  <p className="text-xs text-slate-500 truncate capitalize">
+                    {session?.user?.role?.toLowerCase() || 'Unassigned'}
                   </p>
                 </div>
                 <MoreVertical className="w-4 h-4 text-slate-400 shrink-0" />
