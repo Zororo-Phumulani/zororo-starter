@@ -11,6 +11,9 @@
   --color-emerald-700: #047857;
   --color-emerald-800: #065f46;
   --color-emerald-900: #064e3b;
+  
+  --font-inter: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-poppins: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 }
 
 html, body {
