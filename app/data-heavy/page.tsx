@@ -15,7 +15,8 @@ import {
   LogOut,
   Moon,
   Sun,
-  MoreVertical
+  ChevronsUpDown,
+  Search
 } from "lucide-react";
 import Script from "next/script";
 
@@ -41,31 +42,49 @@ export default function DataHeavyLayout() {
         } relative z-20`}
       >
         {/* Sidebar Header */}
-        <div className={`h-[72px] flex items-center border-b border-slate-200 dark:border-slate-800 shrink-0 transition-all duration-300 ${
-          collapsed ? "justify-center px-2" : "px-4 justify-between"
+        <div className={`flex items-center shrink-0 transition-all duration-300 border-b border-slate-200 dark:border-slate-800 ${
+          collapsed ? "h-[72px] justify-center" : "h-[72px] px-4 justify-between"
         }`}>
-          <div className={`flex flex-col overflow-hidden ${collapsed ? "hidden" : "flex"}`}>
-            <span className="font-semibold text-lg tracking-tight truncate text-slate-900 dark:text-white leading-tight">
-              Data Analytics
-            </span>
-            <span className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">
-              Zororo Phumulani
-            </span>
+          <div className={`flex items-center gap-3 overflow-hidden ${collapsed ? "justify-center" : "flex"}`}>
+            <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center shrink-0">
+              <span className="font-bold font-mono text-sm">$</span>
+            </div>
+            {!collapsed && (
+              <div className="flex flex-col overflow-hidden">
+                <span className="font-semibold text-[15px] tracking-tight truncate text-slate-900 dark:text-white leading-none mb-1">
+                  Data Analytics
+                </span>
+                <span className="text-[12px] text-slate-500 truncate leading-none">
+                  Zororo Phumulani
+                </span>
+              </div>
+            )}
           </div>
           
-          <button
-            onClick={() => setCollapsed(!collapsed)}
-            className={`text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-lg flex items-center justify-center ${
-              collapsed ? "w-10 h-10" : "p-1.5"
-            }`}
-          >
-            {collapsed ? <ChevronRight className="w-6 h-6" /> : <ChevronLeft className="w-5 h-5" />}
-          </button>
+          {!collapsed && (
+            <button
+              onClick={() => setCollapsed(true)}
+              className="text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded p-1 flex items-center justify-center"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+          )}
         </div>
 
         {/* Sidebar Navigation */}
-        <div className="flex-1 overflow-y-auto py-6 px-3 space-y-1">
-          <Link href="#" className="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium group relative shadow-sm">
+        <div className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+          {collapsed && (
+            <div className="flex justify-center mb-4">
+              <button
+                onClick={() => setCollapsed(false)}
+                className="text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded w-8 h-8 flex items-center justify-center"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          )}
+          
+          <Link href="#" className="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 bg-[#123c5a] dark:bg-white text-white dark:text-slate-900 font-medium group relative shadow-sm">
             <LayoutDashboard className="w-5 h-5 shrink-0 transition-transform duration-200 scale-110" />
             {!collapsed && <span className="truncate">Overview</span>}
           </Link>
@@ -120,32 +139,34 @@ export default function DataHeavyLayout() {
           <button
             onClick={() => {
               if (collapsed) {
-                signOut();
+                setDropupOpen(!dropupOpen);
               } else {
                 setDropupOpen(!dropupOpen);
               }
             }}
             className={`flex items-center gap-3 w-full p-2 rounded-xl transition-all duration-200 text-left ${
               dropupOpen ? "bg-slate-100 dark:bg-slate-800" : "hover:bg-slate-50 dark:hover:bg-slate-800/50"
-            } ${collapsed ? "justify-center text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20" : ""}`}
-            title={collapsed ? "Log out" : "Settings"}
+            } ${collapsed ? "justify-center" : ""}`}
+            title={collapsed ? "Account menu" : "Settings"}
           >
             {collapsed ? (
-              <LogOut className="w-5 h-5 shrink-0" />
+              <div className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 shrink-0 flex items-center justify-center text-slate-700 dark:text-slate-300 font-semibold text-sm border border-slate-200 dark:border-slate-700">
+                {getInitials(session?.user?.name)}
+              </div>
             ) : (
               <>
-                <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/30 shrink-0 flex items-center justify-center text-blue-600 font-semibold text-sm border-2 border-transparent group-hover:border-blue-500 transition-colors">
+                <div className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 shrink-0 flex items-center justify-center text-slate-700 dark:text-slate-300 font-semibold text-sm border border-slate-200 dark:border-slate-700">
                   {getInitials(session?.user?.name)}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-slate-900 dark:text-white truncate">
+                  <p className="text-[13px] font-medium text-slate-900 dark:text-white truncate">
                     {session?.user?.name || 'Guest User'}
                   </p>
-                  <p className="text-xs text-slate-500 truncate capitalize">
-                    {session?.user?.role?.toLowerCase() || 'Unassigned'}
+                  <p className="text-[12px] text-slate-500 truncate">
+                    {session?.user?.email || 'user@zororophumulani.co.za'}
                   </p>
                 </div>
-                <MoreVertical className="w-4 h-4 text-slate-400 shrink-0" />
+                <ChevronsUpDown className="w-4 h-4 text-slate-400 shrink-0" />
               </>
             )}
           </button>
@@ -156,10 +177,21 @@ export default function DataHeavyLayout() {
       <main className="flex-1 flex flex-col min-w-0 bg-slate-50 dark:bg-slate-950 overflow-hidden relative z-10">
         {/* Top bar for data-heavy view */}
         <header className="h-[72px] border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-6 shrink-0 bg-white dark:bg-slate-900">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white">
-            Analytics Dashboard
-          </h2>
+          <div className="flex items-center gap-2 text-slate-900 dark:text-white text-[14px]">
+            <span className="text-slate-500">Data Analytics</span>
+            <span className="text-slate-300 dark:text-slate-600">/</span>
+            <span className="font-medium">Overview</span>
+          </div>
           <div className="flex items-center gap-4">
+            {/* Search Bar */}
+            <div className="hidden md:flex items-center bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 w-[280px] shadow-sm">
+              <Search className="w-4 h-4 text-slate-400 mr-2 shrink-0" />
+              <input type="text" placeholder="Search" className="bg-transparent border-none outline-none text-sm flex-1 placeholder:text-slate-400 min-w-0" />
+              <kbd className="hidden lg:inline-flex items-center gap-1 px-1.5 font-mono text-[10px] font-medium text-slate-400 bg-slate-100 dark:bg-slate-800 rounded">
+                <span className="text-[12px]">⌘</span> / Ctrl K
+              </kbd>
+            </div>
+
             {/* App Switcher properly mounted in the top bar */}
             <div id="zp-app-switcher-mount" className="w-10 h-10 flex items-center justify-center shrink-0" />
             <Script 
