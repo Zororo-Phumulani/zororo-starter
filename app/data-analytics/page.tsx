@@ -26,6 +26,8 @@ export default function DataHeavyLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const [dropupOpen, setDropupOpen] = useState(false);
 
+  const identityToken = (session as any)?.identityAccessToken || (session as any)?.accessToken || "";
+
   // Mount switcher safely on client-side navigations
   useEffect(() => {
     // Clear the lock so the IIFE runs again
@@ -52,8 +54,6 @@ export default function DataHeavyLayout() {
     if (!name) return "?";
     return name.trim().split(/\s+/).slice(0, 2).map(part => part[0]).join("").toUpperCase();
   };
-
-  const identityToken = (session as any)?.identityAccessToken || (session as any)?.accessToken || "";
 
   return (
     <div className="flex w-full h-[100dvh] bg-slate-50 dark:bg-slate-950 overflow-hidden absolute top-0 left-0 right-0 bottom-0 z-50">
