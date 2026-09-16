@@ -170,7 +170,7 @@ export default function StarterPage() {
                 <div className="mt-auto">
                   <Link 
                     href="/data-heavy"
-                    className="inline-flex items-center gap-3 w-full justify-center px-4 py-3 bg-blue-50 text-blue-700 hover:bg-blue-100 font-semibold rounded-lg transition-colors"
+                    className="inline-flex items-center gap-3 w-full justify-center px-4 py-2.5 bg-[#0c1e33] text-white hover:bg-slate-800 font-medium rounded-md transition-colors"
                   >
                     Preview sidebar layout
                     <span aria-hidden="true">→</span>
