@@ -294,7 +294,7 @@ export default function DataHeavyLayout() {
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {[
-                  { id: 1, name: "Thabo Mbeki", amount: "R 1,250.00", status: "Cleared" },
+                  { id: 1, name: "David Dlamini", amount: "R 1,250.00", status: "Cleared" },
                   { id: 2, name: "Sarah Jenkins", amount: "R 450.00", status: "Pending" },
                   { id: 3, name: "Michael Ndlovu", amount: "R 3,100.00", status: "Cleared" },
                   { id: 4, name: "Lerato Khumalo", amount: "R 850.00", status: "Failed" },
