@@ -57,7 +57,7 @@ export function Header() {
   // We explicitly load the switcher script here so it has access to the mount and token
   const identityToken = (session as any)?.identityAccessToken || (session as any)?.accessToken || "";
 
-  if (pathname === '/data-heavy') {
+  if (pathname === '/data-analytics') {
     return null;
   }
 

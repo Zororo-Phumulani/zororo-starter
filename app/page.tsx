@@ -157,22 +157,17 @@ export default function StarterPage() {
                 </div>
               </article>
 
-              <article className="p-6 flex flex-col">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-slate-200/50 flex items-center justify-center text-slate-700">
-                    <LayoutGrid className="w-6 h-6" />
-                  </div>
-                </div>
-                <h2 className="text-lg font-semibold text-slate-900 m-0 mb-1">
+              <article className="p-6 flex flex-col justify-center">
+                <h2 className="text-xl font-semibold text-slate-900 m-0 mb-2">
                   Data Analytics Layout
                 </h2>
-                <p className="text-sm text-slate-600 mb-6">
+                <p className="text-sm text-slate-600 mb-4 max-w-sm">
                   See how the application adapts for administrative interfaces and data-heavy dashboards, featuring the collapsible Collections Agent sidebar with bottom avatar placement.
                 </p>
                 <div>
                   <Link 
-                    href="/data-heavy"
-                    className="inline-flex items-center gap-3 w-full justify-center px-4 py-2.5 bg-[#0c1e33] text-white hover:bg-slate-800 font-medium rounded-md transition-colors"
+                    href="/data-analytics"
+                    className="inline-flex items-center gap-3 justify-center px-6 py-2.5 bg-[#0c1e33] text-white hover:bg-slate-800 font-medium rounded-md transition-colors w-auto"
                   >
                     Preview sidebar layout
                     <span aria-hidden="true">→</span>

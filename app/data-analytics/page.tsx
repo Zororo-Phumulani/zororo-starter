@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { 
@@ -16,7 +16,8 @@ import {
   Moon,
   Sun,
   ChevronsUpDown,
-  Search
+  Search,
+  LineChart
 } from "lucide-react";
 import Script from "next/script";
 
@@ -24,6 +25,28 @@ export default function DataHeavyLayout() {
   const { data: session } = useSession();
   const [collapsed, setCollapsed] = useState(false);
   const [dropupOpen, setDropupOpen] = useState(false);
+
+  // Mount switcher safely on client-side navigations
+  useEffect(() => {
+    // Clear the lock so the IIFE runs again
+    delete (window as any).__zpSwitcherLoaded;
+    
+    // Remove old instances if any exist to prevent duplicates
+    document.querySelectorAll('.__zp-sw, .__zp-sw-overlay').forEach(el => el.remove());
+
+    const script = document.createElement('script');
+    script.src = "https://identity.zororophumulani.co.za/switcher.js";
+    script.setAttribute('data-token', identityToken);
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Clean up when leaving page
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, [identityToken]);
   
   const getInitials = (name?: string | null) => {
     if (!name) return "?";
@@ -47,7 +70,7 @@ export default function DataHeavyLayout() {
         }`}>
           <div className={`flex items-center gap-3 overflow-hidden ${collapsed ? "justify-center w-full" : "flex"}`}>
             <div className="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center shrink-0 shadow-sm">
-              <span className="font-bold font-mono text-base">$</span>
+              <LineChart className="w-6 h-6 text-[#123c5a] dark:text-slate-300" />
             </div>
             {!collapsed && (
               <div className="flex flex-col overflow-hidden">
@@ -202,11 +225,6 @@ export default function DataHeavyLayout() {
 
             {/* App Switcher properly mounted in the top bar */}
             <div id="zp-app-switcher-mount" className="w-10 h-10 flex items-center justify-center shrink-0" />
-            <Script 
-              src="https://identity.zororophumulani.co.za/switcher.js" 
-              strategy="lazyOnload"
-              data-token={identityToken} 
-            />
 
             <button className="w-10 h-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-400 transition-colors">
               <Bell className="w-5 h-5" />
