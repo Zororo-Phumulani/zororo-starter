@@ -3,7 +3,7 @@
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, ExternalLink, LogOut, Settings } from "lucide-react";
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 
@@ -26,11 +26,23 @@ export function Header() {
         setMenuOpen(false);
       }
     };
+    const keyHandler = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && detailsRef.current?.open) {
+        detailsRef.current.removeAttribute("open");
+        setMenuOpen(false);
+      }
+    };
     document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
+    document.addEventListener("keydown", keyHandler);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("keydown", keyHandler);
+    };
   }, []);
 
-  const toggleTheme = () => {
+  const toggleTheme = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
     const next = !isDark;
     setIsDark(next);
     localStorage.setItem("zororo-theme", next ? "dark" : "light");
@@ -50,8 +62,8 @@ export function Header() {
   }
 
   return (
-    <header className="h-[72px] border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-center px-6 shrink-0 relative z-50 transition-colors">
-      <div className="w-full max-w-[1248px] mx-auto flex items-center justify-between">
+    <header className="h-[72px] border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-center shrink-0 relative z-50 transition-colors">
+      <div className="w-full max-w-[1248px] mx-auto px-[24px] flex items-center justify-between">
         <Link href="/" className="flex flex-col text-slate-900 dark:text-white no-underline whitespace-nowrap">
           <span className="font-poppins font-semibold text-[22px] leading-none">
             Zororo Phumulani
@@ -83,40 +95,59 @@ export function Header() {
                 className="list-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded-full"
               >
                 <style jsx>{`summary::-webkit-details-marker { display: none; }`}</style>
-                <div className="w-11 h-11 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white flex items-center justify-center font-semibold text-[14px] hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                <div className="w-11 h-11 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white flex items-center justify-center font-semibold text-[13px] hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
                   {getInitials(session.user.name)}
                 </div>
               </summary>
               
-              <div className="absolute right-0 top-[calc(100%+8px)] w-[260px] p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.12)]">
-                <p className="font-semibold text-slate-900 dark:text-white text-[14px] m-0 truncate">
+              <div className="absolute right-0 top-[56px] w-[260px] max-w-[calc(100vw-48px)] p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] z-20">
+                <p className="font-semibold text-slate-900 dark:text-white text-[15px] m-0 break-words">
                   {session.user.name}
                 </p>
-                <p className="text-[12px] text-slate-500 dark:text-slate-400 mt-1 mb-3 truncate">
-                  {session.user.email || 'Zororo Phumulani App Starter'}
+                <p className="text-[12px] text-slate-500 dark:text-slate-400 mt-1 mb-3">
+                  Zororo Phumulani App Starter
                 </p>
                 
                 <div className="h-px bg-slate-200 dark:bg-slate-800 my-2 -mx-4"></div>
                 
-                <div className="flex items-center justify-between py-2 mb-2">
-                  <span className="text-[14px] text-slate-700 dark:text-slate-300">Appearance</span>
+                {/* Theme Switch */}
+                <div 
+                  className="flex min-h-[44px] w-full cursor-pointer items-center justify-between rounded-md pl-3 pr-1 py-1 text-[14px] text-slate-900 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  onClick={toggleTheme}
+                >
+                  <span>Appearance</span>
                   <button 
-                    onClick={toggleTheme}
+                    type="button"
                     aria-label="Toggle dark mode"
                     title="Switch appearance"
-                    className="flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+                    className="inline-flex size-11 shrink-0 items-center justify-center rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
                   >
-                    {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                    {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                   </button>
                 </div>
 
                 <div className="h-px bg-slate-200 dark:bg-slate-800 my-2 -mx-4"></div>
+
+                <a
+                  href="https://identity.zororophumulani.co.za/security"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-h-[44px] w-full items-center justify-between rounded-md pl-3 pr-1 py-1 text-[14px] text-slate-900 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors no-underline"
+                >
+                  <span>Account security</span>
+                  <div className="inline-flex size-11 shrink-0 items-center justify-center">
+                    <ExternalLink className="w-5 h-5 text-slate-500 dark:text-slate-400" />
+                  </div>
+                </a>
                 
                 <button 
                   onClick={() => signOut()}
-                  className="w-full text-left px-3 py-2.5 rounded-md text-[14px] text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  className="flex min-h-[44px] w-full items-center justify-between rounded-md pl-3 pr-1 py-1 text-[14px] text-slate-900 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-left"
                 >
-                  Sign out
+                  <span>Sign out</span>
+                  <div className="inline-flex size-11 shrink-0 items-center justify-center">
+                    <LogOut className="w-5 h-5 text-slate-500 dark:text-slate-400" />
+                  </div>
                 </button>
               </div>
             </details>
