@@ -13,7 +13,7 @@ export const authOptions: NextAuthOptions = {
           return {
             id: "dev-mock-123",
             name: "Jane Doe (Developer Preview)",
-            email: "jane.doe@zororophumulani.co.za",
+            email: "jane.doe@example.com",
             role: "developer"
           };
         }

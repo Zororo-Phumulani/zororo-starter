@@ -52,7 +52,7 @@ export function Header() {
     document.querySelectorAll('.__zp-sw, .__zp-sw-overlay').forEach(el => el.remove());
 
     const script = document.createElement('script');
-    script.src = "https://identity.zororophumulani.co.za/switcher.js";
+    script.src = process.env.NEXT_PUBLIC_SWITCHER_URL || '';
     if (identityToken) {
       script.setAttribute('data-token', identityToken);
     }
@@ -148,7 +148,7 @@ export function Header() {
                 <div className="h-px bg-slate-200 dark:bg-slate-800 my-2 -mx-4"></div>
 
                 <a
-                  href="https://identity.zororophumulani.co.za/security"
+                  href={process.env.NEXT_PUBLIC_SECURITY_URL || '#'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex min-h-[44px] w-full items-center justify-between rounded-md pl-3 pr-1 py-1 text-[14px] text-slate-900 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors no-underline"

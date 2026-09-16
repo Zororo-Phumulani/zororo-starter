@@ -55,8 +55,10 @@ export default function DataHeavyLayout() {
     document.querySelectorAll('.__zp-sw, .__zp-sw-overlay').forEach(el => el.remove());
 
     const script = document.createElement('script');
-    script.src = "https://identity.zororophumulani.co.za/switcher.js";
-    script.setAttribute('data-token', identityToken);
+    script.src = process.env.NEXT_PUBLIC_SWITCHER_URL || '';
+    if (identityToken) {
+      script.setAttribute('data-token', identityToken);
+    }
     script.async = true;
     document.body.appendChild(script);
 
@@ -214,7 +216,7 @@ export default function DataHeavyLayout() {
                     {session?.user?.name || 'Guest User'}
                   </p>
                   <p className="text-[12px] text-slate-500 truncate mt-0.5">
-                    {session?.user?.email || 'user@zororophumulani.co.za'}
+                    {session?.user?.email || 'user@example.com'}
                   </p>
                 </div>
                 <ChevronsUpDown className="w-4 h-4 text-slate-400 shrink-0" />
