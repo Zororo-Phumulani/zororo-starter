@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession, signIn } from "next-auth/react";
-import { ArrowRight, BookOpen, Key, CheckCircle2, AlertCircle } from "lucide-react";
+import { AppWindow, LayoutGrid, Users, Heart } from "lucide-react";
 
 export default function StarterPage() {
   const { data: session, status } = useSession();
@@ -21,136 +21,140 @@ export default function StarterPage() {
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-6 py-12">
+    <div className="w-full">
       {!session ? (
-        // Unauthenticated State - ZDES Compliant Focal Area
-        <div className="flex flex-col md:flex-row gap-12 items-start mt-8">
-          <div className="flex-1 space-y-6">
-            <h1 className="text-[40px] leading-[1.1] font-bold text-slate-900 tracking-tight">
-              Connect your application
-            </h1>
-            <p className="text-lg text-slate-600 max-w-md leading-relaxed">
-              Integrate directly with the Zororo Phumulani digital ecosystem. Provide your users with unified access, central security, and a seamless workspace experience.
-            </p>
-            
-            <div className="pt-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+        // Unauthenticated State - Exactly mirroring the Workspace Welcome Layout
+        <div className="max-w-[1248px] mx-auto px-6 pt-16 pb-8">
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-14 items-center">
+            <div>
+              <p className="text-[11px] font-poppins font-bold uppercase tracking-wider text-slate-500 mb-5">
+                ZORORO PHUMULANI APP STARTER
+              </p>
+              <h1 className="text-[clamp(36px,4.3vw,56px)] leading-[1.12] font-bold text-slate-900 mb-6 max-w-[550px] font-inter">
+                Together, we make every day count.
+              </h1>
+              <p className="text-[17px] leading-[1.8] text-slate-600 max-w-[520px] mb-10">
+                Welcome to your Zororo Phumulani application starter. A clean, connected template that seamlessly integrates with Identity and the global Workspace.
+              </p>
               <button
                 onClick={handleSignIn}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold text-white bg-blue-600 rounded shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-[#fbfbf9] transition-colors"
+                className="inline-flex items-center gap-5 px-6 py-4 bg-slate-900 text-white font-medium rounded-lg hover:bg-slate-800 transition-colors w-full md:w-auto justify-center"
               >
-                Sign in to connect
-                <ArrowRight className="w-4 h-4" />
+                Continue with Zororo Phumulani Identity
+                <span aria-hidden="true" className="text-xl leading-none">'</span>
               </button>
-              
-              <a href="#" className="inline-flex items-center gap-2 px-6 py-3 font-semibold text-slate-700 bg-white border border-slate-300 rounded hover:bg-slate-50 transition-colors">
-                <BookOpen className="w-4 h-4" />
-                Read documentation
-              </a>
             </div>
-
-            {process.env.NEXT_PUBLIC_STARTER_MODE === "true" && (
-              <div className="mt-8 flex items-start gap-3 p-4 bg-emerald-50 rounded text-emerald-800 border border-emerald-100">
-                <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5 text-emerald-600" />
-                <div>
-                  <p className="font-semibold text-sm">Starter mode is active</p>
-                  <p className="text-sm mt-1 text-emerald-700/90">
-                    Authentication is currently simulated. You can test the sign-in experience without configuring a live client secret.
-                  </p>
-                </div>
+            
+            <figure className="m-0 overflow-hidden rounded-2xl h-[240px] md:h-[440px] bg-slate-200 border border-slate-300 flex items-center justify-center order-first md:order-last">
+              {/* Fallback pattern mimicking the welcome-care photo area */}
+              <div className="text-center text-slate-500 flex flex-col items-center">
+                <AppWindow className="w-16 h-16 mb-4 opacity-50" />
+                <p className="font-medium">Welcome Graphic Placeholder</p>
               </div>
-            )}
-          </div>
+            </figure>
+          </section>
 
-          <div className="w-full md:w-[400px] shrink-0 bg-white rounded-lg shadow-sm border border-slate-200 p-8">
-            <div className="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-6">
-              <Key className="w-6 h-6 text-white" />
+          <section className="mt-14 py-9 border-t border-slate-200">
+            <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-8">
+              <p className="text-[11px] font-poppins font-bold uppercase tracking-wider text-slate-500 md:mt-1.5">
+                DEVELOPER EXPERIENCE
+              </p>
+              <h2 className="text-[24px] md:text-[25px] leading-[1.3] tracking-[-0.025em] font-bold text-slate-900 max-w-[550px] m-0">
+                Connected to our network.<br />Closer to the people we serve.
+              </h2>
             </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-3">
-              Standard OAuth 2.0
-            </h3>
-            <p className="text-slate-600 text-sm leading-relaxed mb-6">
-              This provider implements a confidential-client authorization code flow. Your application owns its pages and local session, while Zororo Phumulani Identity manages security.
-            </p>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3 text-sm text-slate-700">
-                <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2" />
-                Secure server-side token exchange
-              </li>
-              <li className="flex items-start gap-3 text-sm text-slate-700">
-                <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2" />
-                Automatic session synchronization
-              </li>
-              <li className="flex items-start gap-3 text-sm text-slate-700">
-                <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2" />
-                Centralized role management
-              </li>
-            </ul>
-          </div>
-        </div>
-      ) : (
-        // Authenticated State - ZDES Compliant Workspace
-        <div className="space-y-8 animate-in fade-in duration-500">
-          <header className="flex flex-col gap-2 border-b border-slate-200 pb-8">
-            <div className="flex items-center gap-3">
-              <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
-                Workspace overview
-              </h1>
-              <span className="inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-800">
-                Active
-              </span>
-            </div>
-            <p className="text-slate-600">
-              Welcome back, {session.user?.name}. Your application is securely connected.
-            </p>
-          </header>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
-              <div className="p-6 border-b border-slate-200">
-                <h2 className="text-lg font-bold text-slate-900">
-                  Current session data
-                </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+              <div className="pr-0 md:pr-6">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 mb-3.5">
+                  <LayoutGrid className="w-[22px] h-[22px] text-slate-700" />
+                </span>
+                <h3 className="text-[16px] font-semibold text-slate-900 mb-2">Start in one familiar place</h3>
+                <p className="text-[14px] leading-[1.7] text-slate-600 m-0">
+                  Built to snap instantly into the global App Switcher and central Workspace environment.
+                </p>
               </div>
-              <div className="p-0 bg-slate-50 border-t border-slate-200">
-                <pre className="p-6 text-sm text-slate-800 font-mono whitespace-pre-wrap break-all overflow-auto max-h-[400px]">
-                  {JSON.stringify(session, null, 2)}
-                </pre>
+              <div className="pr-0 md:pr-6 border-t md:border-t-0 md:border-l border-slate-200 pt-6 md:pt-0 md:pl-7">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 mb-3.5">
+                  <Users className="w-[22px] h-[22px] text-slate-700" />
+                </span>
+                <h3 className="text-[16px] font-semibold text-slate-900 mb-2">Unified Authentication</h3>
+                <p className="text-[14px] leading-[1.7] text-slate-600 m-0">
+                  Standard OAuth 2.0 flow ensures strict security while delivering a single-sign-on experience.
+                </p>
               </div>
-            </div>
-
-            <div className="space-y-6">
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-                <h3 className="font-bold text-slate-900 mb-4">Required next steps</h3>
-                <div className="space-y-4">
-                  <div className="flex gap-3">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">
-                      1
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-slate-900">Database setup</h4>
-                      <p className="text-sm text-slate-600 mt-1">Configure your Prisma schema for production.</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-3">
-                    <div className="w-6 h-6 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">
-                      2
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-slate-900">Business logic</h4>
-                      <p className="text-sm text-slate-600 mt-1">Build your specific application workflows.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-[#fbfbf9] p-5 rounded-lg border border-slate-200 flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-slate-500 shrink-0 mt-0.5" />
-                <p className="text-sm text-slate-600">
-                  Ensure you update your <code className="bg-slate-200 px-1 py-0.5 rounded text-xs text-slate-800">NEXTAUTH_URL</code> before deploying to Railway.
+              <div className="border-t md:border-t-0 md:border-l border-slate-200 pt-6 md:pt-0 md:pl-7">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 mb-3.5">
+                  <Heart className="w-[22px] h-[22px] text-slate-700" />
+                </span>
+                <h3 className="text-[16px] font-semibold text-slate-900 mb-2">Keep people at the heart</h3>
+                <p className="text-[14px] leading-[1.7] text-slate-600 m-0">
+                  Behind every task is a person. Your integrations help us care for the families who count on us.
                 </p>
               </div>
             </div>
-          </div>
+          </section>
+
+          <footer className="mt-2 md:mt-8 border-t border-slate-200 pt-8 pb-12">
+            <span className="text-sm font-medium text-slate-500">With you. For your family.</span>
+          </footer>
+        </div>
+      ) : (
+        // Authenticated State - Workspace List View Match
+        <div className="max-w-[1248px] mx-auto px-6 py-12">
+          <section className="grid grid-cols-1 mb-8 pb-8 border-b border-slate-200">
+            <div>
+              <p className="text-[11px] font-poppins font-bold uppercase tracking-wider text-slate-500 mb-2">
+                ZORORO PHUMULANI APP STARTER
+              </p>
+              <h1 className="text-3xl md:text-4xl font-bold text-slate-900 font-inter mb-3">
+                Welcome, {session.user?.name?.trim().split(/\s+/)[0] || 'there'}.
+              </h1>
+              <p className="text-slate-600 text-[17px]">
+                Your application is connected and you are securely signed in.
+              </p>
+            </div>
+          </section>
+
+          <section aria-labelledby="apps-heading">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+              <div>
+                <h2 id="apps-heading" className="flex items-center gap-2.5 text-2xl font-semibold text-slate-900 m-0">
+                  Session Identity
+                  <span className="inline-flex items-center justify-center min-w-[28px] h-7 px-2 rounded-lg bg-emerald-100 text-emerald-800 text-[13px] font-medium tabular-nums">
+                    Active
+                  </span>
+                </h2>
+                <p className="text-slate-600 mt-1">Live data from the Zororo Phumulani token.</p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 gap-6">
+              <article className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col h-full">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-700">
+                    <AppWindow className="w-6 h-6" />
+                  </div>
+                  {process.env.NEXT_PUBLIC_STARTER_MODE === "true" && (
+                    <span className="inline-flex px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-semibold">
+                      Developer Preview
+                    </span>
+                  )}
+                </div>
+                <h2 className="text-lg font-semibold text-slate-900 m-0 mb-1">
+                  OAuth Token Payload
+                </h2>
+                <p className="text-sm text-slate-500 mb-6">
+                  {session.user?.role === 'ADMIN' ? 'Administrator access' : 'Assigned application role'}
+                </p>
+                <div className="mt-auto bg-slate-50 border border-slate-200 rounded-lg p-4 overflow-auto">
+                  <pre className="text-xs text-slate-700 font-mono">
+                    {JSON.stringify(session, null, 2)}
+                  </pre>
+                </div>
+              </article>
+            </div>
+          </section>
         </div>
       )}
     </div>
