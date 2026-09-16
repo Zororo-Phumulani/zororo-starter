@@ -129,7 +129,7 @@ export default function StarterPage() {
               </div>
             </div>
             
-            <div className="grid grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <article className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col h-full">
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-700">
@@ -147,10 +147,33 @@ export default function StarterPage() {
                 <p className="text-sm text-slate-500 mb-6">
                   {session.user?.role === 'ADMIN' ? 'Administrator access' : 'Assigned application role'}
                 </p>
-                <div className="mt-auto bg-slate-50 border border-slate-200 rounded-lg p-4 overflow-auto">
+                <div className="mt-auto bg-slate-50 border border-slate-200 rounded-lg p-4 overflow-auto max-h-[300px]">
                   <pre className="text-xs text-slate-700 font-mono">
                     {JSON.stringify(session, null, 2)}
                   </pre>
+                </div>
+              </article>
+
+              <article className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-col h-full">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-700">
+                    <LayoutGrid className="w-6 h-6" />
+                  </div>
+                </div>
+                <h2 className="text-lg font-semibold text-slate-900 m-0 mb-1">
+                  Data-Heavy Sidebar Layout
+                </h2>
+                <p className="text-sm text-slate-500 mb-6">
+                  See how the application adapts for administrative interfaces and data-heavy dashboards, featuring the collapsible Collections Agent sidebar with bottom avatar placement.
+                </p>
+                <div className="mt-auto">
+                  <Link 
+                    href="/data-heavy"
+                    className="inline-flex items-center gap-3 w-full justify-center px-4 py-3 bg-blue-50 text-blue-700 hover:bg-blue-100 font-semibold rounded-lg transition-colors"
+                  >
+                    Preview sidebar layout
+                    <span aria-hidden="true">→</span>
+                  </Link>
                 </div>
               </article>
             </div>

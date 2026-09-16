@@ -39,12 +39,6 @@ export default function RootLayout({
           strategy="lazyOnload"
           data-app-code="STARTER_APP"
         />
-
-        {/* App Switcher Script */}
-        <Script
-          src="https://identity.zororophumulani.co.za/switcher.js"
-          strategy="lazyOnload"
-        />
         </Providers>
       </body>
     </html>
