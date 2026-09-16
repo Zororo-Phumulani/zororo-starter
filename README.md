@@ -6,21 +6,39 @@ A minimal Next.js 14 template demonstrating how to connect a new application to 
 1. **Zororo Identity SSO**: Pre-configured NextAuth setup to sign in with `@zororo-identity`.
 2. **App Switcher**: Injected `switcher.js` script with the target mount element.
 3. **IT Support Widget**: Global floating chat widget integration for on-page help.
+4. **Dark Mode**: Tailwind CSS v4 dark mode configured.
 
 ## Getting Started
 
-1. Copy `.env.example` to `.env.local`
-2. Update the environment variables with your specific OAuth client credentials obtained from the Identity admin panel.
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Run the development server:
-   ```bash
-   npm run dev
-   ```
+### 1. Environment Setup
+Copy `.env.example` to `.env.local`:
+```bash
+cp .env.example .env.local
+```
+
+### 2. Configure Secrets
+Update the environment variables in `.env.local` with your specific OAuth client credentials obtained from the Identity admin panel.
+
+**Important**: You must generate a secure, random secret for `NEXTAUTH_SECRET`. You can generate one by running the following command in your terminal:
+```bash
+openssl rand -base64 32
+```
+Copy the output and paste it as your `NEXTAUTH_SECRET` in `.env.local`.
+
+### 3. Install & Run
+Install dependencies:
+```bash
+npm install
+```
+
+Run the development server:
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Key Files to Review
-* `lib/auth.ts`: NextAuth configuration linking to `https://identity.zororophumulani.co.za`.
-* `app/layout.tsx`: See how `switcher.js` and `widget.js` are loaded via Next.js `<Script>` tags.
-* `app/page.tsx`: Usage of `useSession()` to read the user's authenticated profile.
+* `lib/auth.ts`: NextAuth configuration linking to `https://identity.zororophumulani.co.za`. 
+* `app/layout.tsx`: See how the IT support `widget.js` script is mounted globally.
+* `components/Header.tsx`: Usage of `useSession()` to read the user's authenticated profile and dynamic mounting of the `switcher.js` UI.
