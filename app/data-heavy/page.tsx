@@ -46,7 +46,7 @@ export default function DataHeavyLayout() {
         }`}>
           <div className={`flex flex-col overflow-hidden ${collapsed ? "hidden" : "flex"}`}>
             <span className="font-semibold text-lg tracking-tight truncate text-slate-900 dark:text-white leading-tight">
-              Data Heavy App
+              Data Analytics
             </span>
             <span className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">
               Zororo Phumulani
@@ -143,7 +143,7 @@ export default function DataHeavyLayout() {
         {/* Top bar for data-heavy view */}
         <header className="h-[72px] border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-6 shrink-0 bg-white dark:bg-slate-900">
           <h2 className="text-xl font-bold text-slate-900 dark:text-white">
-            Data Overview
+            Analytics Dashboard
           </h2>
           <div className="flex items-center gap-4">
             {/* App Switcher properly mounted in the top bar */}

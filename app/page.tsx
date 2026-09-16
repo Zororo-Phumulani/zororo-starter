@@ -162,7 +162,7 @@ export default function StarterPage() {
                   </div>
                 </div>
                 <h2 className="text-lg font-semibold text-slate-900 m-0 mb-1">
-                  Data-Heavy Sidebar Layout
+                  Data Analytics Layout
                 </h2>
                 <p className="text-sm text-slate-500 mb-6">
                   See how the application adapts for administrative interfaces and data-heavy dashboards, featuring the collapsible Collections Agent sidebar with bottom avatar placement.
