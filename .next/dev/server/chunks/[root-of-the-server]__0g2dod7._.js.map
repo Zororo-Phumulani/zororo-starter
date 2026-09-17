@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 124, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/tafad/Documents/code/Zororo%20Phumulani%20Digital/zororo-starter/app/api/auth/[...nextauth]/route.ts"],"sourcesContent":["import NextAuth from \"next-auth\";\nimport { authOptions } from \"../../../lib/auth\";\n\nconst handler = NextAuth(authOptions);\n\nexport { handler as GET, handler as POST };\n"],"names":["handler","authOptions"],"mappings":";;;;;;AAAA;;;;;;;;AAGA,MAAMA,UAAU,IAAA,kJAAQ,EAACC"}}]
+}

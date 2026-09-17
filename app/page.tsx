@@ -97,7 +97,7 @@ export default function StarterPage() {
           </section>
 
           <footer className="mt-2 md:mt-8 border-t border-slate-200 dark:border-slate-800 pt-8 pb-12">
-            <span className="text-sm font-medium text-slate-500 dark:text-slate-400">With you. For your family.</span>
+            <span className="text-sm font-medium text-slate-500 dark:text-slate-400">For the ones you love.</span>
           </footer>
         </div>
       ) : (
