@@ -1,188 +1,101 @@
 "use client";
 
-import { useSession, signIn } from "next-auth/react";
-import { AppWindow, LayoutGrid, Users, Heart } from "lucide-react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Plus, Calendar, CheckCircle2, Clock, Mail } from "lucide-react";
 
-export default function StarterPage() {
-  const { data: session, status } = useSession();
+export default function Dashboard() {
+  const [announcements, setAnnouncements] = useState<any[]>([]);
 
-  const handleSignIn = () => {
-    // In STARTER_MODE, bypass real OAuth for developer previews
-    const provider = process.env.NEXT_PUBLIC_STARTER_MODE === "true" ? "starter-mock" : "zororo-identity";
-    signIn(provider);
+  useEffect(() => {
+    fetch("/api/announcements")
+      .then(res => res.json())
+      .then(data => setAnnouncements(data.announcements || []))
+      .catch(console.error);
+  }, []);
+
+  const getStatusIcon = (status: string) => {
+    switch(status) {
+      case "PUBLISHED": return <CheckCircle2 className="text-green-500" size={16} />;
+      case "SCHEDULED": return <Clock className="text-blue-500" size={16} />;
+      default: return <Mail className="text-gray-400" size={16} />;
+    }
   };
 
-  if (status === "loading") {
-    return (
-      <div className="flex-1 flex items-center justify-center">
-        <p className="text-slate-500 dark:text-slate-400 font-medium">Loading workspace...</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="w-full">
-      {!session ? (
-        // Unauthenticated State - Exactly mirroring the Workspace Welcome Layout
-        <div className="max-w-[1248px] mx-auto px-[24px] py-[60px]">
-          <section className="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-[56px] items-center">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400 mb-5">
-                ZORORO PHUMULANI APP STARTER
-              </p>
-              <h1 className="text-[clamp(36px,4.3vw,56px)] leading-[1.12] font-semibold text-slate-900 dark:text-white mt-[20px] mb-[24px] max-w-[550px] font-inter">
-                Together, we make every day count.
-              </h1>
-              <p className="text-[17px] leading-[1.8] text-slate-600 dark:text-slate-400 max-w-[520px]">
-                Welcome to your Zororo Phumulani application starter. A clean, connected template that seamlessly integrates with Identity and the global Workspace.
-              </p>
-              <button
-                onClick={handleSignIn}
-                className="inline-flex items-center gap-[36px] px-[20px] py-[14px] mt-[20px] bg-[#123c5a] text-white text-[14px] rounded-lg hover:bg-slate-800 transition-colors w-full md:w-auto justify-between"
-              >
-                Continue with Zororo Phumulani Identity
-                <span aria-hidden="true" className="text-xl leading-none">'</span>
-              </button>
-            </div>
-            
-            <figure className="m-0 overflow-hidden rounded-2xl h-[240px] md:h-[440px] bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 flex items-center justify-center order-first md:order-last">
-              {/* Fallback pattern mimicking the welcome-care photo area */}
-              <div className="text-center text-slate-500 dark:text-slate-400 flex flex-col items-center">
-                <AppWindow className="w-16 h-16 mb-4 opacity-50" />
-                <p className="font-medium">Welcome Graphic Placeholder</p>
-              </div>
-            </figure>
-          </section>
-
-          <section className="mt-14 py-9 border-t border-slate-200 dark:border-slate-800">
-            <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-8">
-              <p className="text-[11px] font-poppins font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 md:mt-1.5">
-                DEVELOPER EXPERIENCE
-              </p>
-              <h2 className="text-[24px] md:text-[25px] leading-[1.3] tracking-[-0.025em] font-bold text-slate-900 dark:text-white max-w-[550px] m-0">
-                Connected to our network.<br />Closer to the people we serve.
-              </h2>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-              <div className="pr-0 md:pr-6">
-                <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 mb-3.5">
-                  <LayoutGrid className="w-[22px] h-[22px] text-slate-700 dark:text-slate-200" />
-                </span>
-                <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white mb-2">Start in one familiar place</h3>
-                <p className="text-[14px] leading-[1.7] text-slate-600 dark:text-slate-400 m-0">
-                  Built to snap instantly into the global App Switcher and central Workspace environment.
-                </p>
-              </div>
-              <div className="pr-0 md:pr-6 border-t md:border-t-0 md:border-l border-slate-200 dark:border-slate-800 pt-6 md:pt-0 md:pl-7">
-                <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 mb-3.5">
-                  <Users className="w-[22px] h-[22px] text-slate-700 dark:text-slate-200" />
-                </span>
-                <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white mb-2">Unified Authentication</h3>
-                <p className="text-[14px] leading-[1.7] text-slate-600 dark:text-slate-400 m-0">
-                  Standard OAuth 2.0 flow ensures strict security while delivering a single-sign-on experience.
-                </p>
-              </div>
-              <div className="border-t md:border-t-0 md:border-l border-slate-200 dark:border-slate-800 pt-6 md:pt-0 md:pl-7">
-                <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 mb-3.5">
-                  <Heart className="w-[22px] h-[22px] text-slate-700 dark:text-slate-200" />
-                </span>
-                <h3 className="text-[16px] font-semibold text-slate-900 dark:text-white mb-2">Keep people at the heart</h3>
-                <p className="text-[14px] leading-[1.7] text-slate-600 dark:text-slate-400 m-0">
-                  Behind every task is a person. Your integrations help us care for the families who count on us.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <footer className="mt-2 md:mt-8 border-t border-slate-200 dark:border-slate-800 pt-8 pb-12">
-            <span className="text-sm font-medium text-slate-500 dark:text-slate-400">For the ones you love.</span>
-          </footer>
+    <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
+      <header className="bg-white border-b px-8 py-6 flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Announcements</h1>
+          <p className="text-sm text-gray-500 mt-1">Manage and schedule internal communications</p>
         </div>
-      ) : (
-        // Authenticated State - Workspace List View Match
-        <div className="max-w-[1248px] mx-auto px-[24px] py-[60px]">
-          <section className="grid grid-cols-1 mb-8 pb-8 border-b border-slate-200 dark:border-slate-800">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400 mb-2">
-                ZORORO PHUMULANI APP STARTER
-              </p>
-              <h1 className="text-[clamp(36px,4vw,54px)] leading-[1.13] font-semibold text-slate-900 dark:text-white font-inter mt-[18px] mb-[20px]">
-                Welcome, {session.user?.name?.trim().split(/\s+/)[0] || 'there'}.
-              </h1>
-              <p className="text-slate-600 dark:text-slate-400 text-[16px] max-w-[580px]">
-                Your application is connected and you are securely signed in.
-              </p>
-            </div>
-          </section>
+        <Link 
+          href="/editor" 
+          className="bg-[#123c5a] hover:bg-[#1a537a] text-white px-5 py-2.5 rounded-md font-medium flex items-center gap-2 transition-colors"
+        >
+          <Plus size={18} /> New Announcement
+        </Link>
+      </header>
 
-          <section aria-labelledby="apps-heading">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-              <div>
-                <h2 id="apps-heading" className="flex items-center gap-[10px] text-[21px] font-semibold text-slate-900 dark:text-white m-0">
-                  Session Identity
-                  <span className="inline-flex items-center justify-center h-7 px-2.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-400 text-[13px] font-medium rounded-lg">
-                    Active
-                  </span>
-                </h2>
-                <p className="text-[14px] text-slate-500 dark:text-slate-400 mt-[5px] mb-0">
-                  Live data from the Zororo Phumulani token.
-                </p>
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <article className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 flex flex-col h-full">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200">
-                    <AppWindow className="w-6 h-6" />
-                  </div>
-                  {process.env.NEXT_PUBLIC_STARTER_MODE === "true" && (
-                    <span className="inline-flex px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold">
-                      Developer Preview
+      <main className="max-w-6xl mx-auto px-8 py-8">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-lg font-semibold flex items-center gap-2">
+            <Calendar size={20} className="text-gray-400" />
+            Communication Timeline
+          </h2>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-gray-50 border-b text-xs uppercase tracking-wider text-gray-500 font-semibold">
+                <th className="px-6 py-4">Title</th>
+                <th className="px-6 py-4">Target Segment</th>
+                <th className="px-6 py-4">Scheduled For</th>
+                <th className="px-6 py-4">Status</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {announcements.map((ann, i) => (
+                <tr key={i} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-6 py-4 font-medium text-gray-900">
+                    <Link href={`/editor?id=${ann.id}`} className="hover:underline">
+                      {ann.title}
+                    </Link>
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-600">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                      {ann.segment}
                     </span>
-                  )}
-                </div>
-                <h2 className="text-lg font-semibold text-slate-900 dark:text-white m-0 mb-1">
-                  OAuth Token Payload
-                </h2>
-                <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">
-                  {session.user?.role === 'ADMIN' ? 'Administrator access' : 'Assigned application role'}
-                </p>
-                <div className="mt-auto bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-lg p-4 overflow-auto max-h-[300px]">
-                  <pre className="text-xs text-slate-700 dark:text-slate-200 font-mono">
-                    {JSON.stringify(session, null, 2)}
-                  </pre>
-                </div>
-              </article>
-
-              <article className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 flex flex-col h-full">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200">
-                    <LayoutGrid className="w-6 h-6" />
-                  </div>
-                </div>
-                <h2 className="text-lg font-semibold text-slate-900 dark:text-white m-0 mb-1">
-                  Data Analytics Layout
-                </h2>
-                <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">
-                  See how the application adapts for administrative interfaces and data-heavy dashboards, featuring the collapsible Collections Agent sidebar with bottom avatar placement.
-                </p>
-                <div className="mt-auto">
-                  <Link 
-                    href="/data-analytics"
-                    className="inline-flex items-center gap-3 w-full justify-center px-4 py-2.5 bg-[#0c1e33] text-white hover:bg-slate-800 font-medium rounded-md transition-colors"
-                  >
-                    Preview sidebar layout
-                    <span aria-hidden="true">→</span>
-                  </Link>
-                </div>
-              </article>
-            </div>
-          </section>
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-500">
+                    {ann.scheduledAt ? new Date(ann.scheduledAt).toLocaleString() : "Immediate"}
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center gap-1.5 text-sm font-medium">
+                      {getStatusIcon(ann.status)}
+                      <span className={
+                        ann.status === "PUBLISHED" ? "text-green-700" :
+                        ann.status === "SCHEDULED" ? "text-blue-700" : "text-gray-600"
+                      }>
+                        {ann.status}
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+              {announcements.length === 0 && (
+                <tr>
+                  <td colSpan={4} className="px-6 py-12 text-center text-gray-500">
+                    <Mail size={32} className="mx-auto mb-3 text-gray-300" />
+                    <p>No announcements yet.</p>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
-      )}
+      </main>
     </div>
   );
 }
